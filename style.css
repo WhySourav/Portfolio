@@ -17,6 +17,7 @@ body {
 
 
 
+
 /* --- Smooth Theme Transitions --- */
 body, .orb, .card, .tilt, .btn, .cta, footer, nav a, blockquote {
   transition: background 0.6s ease, 
@@ -353,3 +354,4 @@ body.light-mode .socials a { color: #111; }
   color: transparent;
   transition: background 1s ease;
 }
+
