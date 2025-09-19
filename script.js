@@ -1,21 +1,6 @@
 // Year update
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Tilt effect
-const tilt = document.getElementById('tilt');
-if (tilt) {
-    tilt.addEventListener('mousemove', (e) => {
-        const rect = tilt.getBoundingClientRect();
-        const x = e.clientX - rect.left, y = e.clientY - rect.top;
-        const rx = ((y / rect.height) - 0.5) * -8;
-        const ry = ((x / rect.width) - 0.5) * 14;
-        tilt.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-    });
-    tilt.addEventListener('mouseleave', () => {
-        tilt.style.transform = 'rotateX(0) rotateY(0)';
-    });
-}
-
 // Form submission (demo)
 const form = document.getElementById('contact-form');
 const statusEl = document.getElementById('form-status');
@@ -33,17 +18,16 @@ const toggleBtn = document.getElementById('theme-toggle');
 const currentTheme = localStorage.getItem('theme');
 
 if (currentTheme === 'light') {
-  document.body.classList.add('light-mode');
-  toggleBtn.textContent = '☀️';
+    document.body.classList.add('light-mode');
+    toggleBtn.textContent = '☀️';
 }
 
 toggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  const isLight = document.body.classList.contains('light-mode');
-  toggleBtn.textContent = isLight ? '☀️' : '🌙';
-  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    toggleBtn.textContent = isLight ? '☀️' : '🌙';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
 });
-
 
 // ------------------Interactive Background: Constellation Effect -----------_----------
 const canvas = document.getElementById('background-canvas');
@@ -116,7 +100,7 @@ function connectParticles(particleColor) {
             );
             if (distance < 150) {
                 opacityValue = 1 - (distance / 150);
-                 let lineColor = particleColor.replace('1)', `${opacityValue})`);
+                let lineColor = particleColor.replace('1)', `${opacityValue})`);
                 ctx.strokeStyle = lineColor;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
@@ -127,7 +111,6 @@ function connectParticles(particleColor) {
         }
     }
 }
-
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -160,7 +143,6 @@ resizeCanvas();
 initParticles();
 animate();
 
-
 // ------------------Interactive Character in "Work With Me" section -----------_----------
 document.addEventListener('DOMContentLoaded', () => {
     const character = document.getElementById('character-container');
@@ -189,13 +171,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-
-
-
-// Listen for form submission
-
-
-
-
-
