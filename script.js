@@ -27,123 +27,110 @@ toggleBtn.addEventListener('click', () => {
     const isLight = document.body.classList.contains('light-mode');
     toggleBtn.textContent = isLight ? '☀️' : '🌙';
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    setTimeout(updateParticleColor, 300); // Update particle color on theme change
 });
 
-// ------------------Interactive Background: Constellation Effect -----------_----------
+// ------------------ 3D Interactive Background with Three.js ------------------
+
 const canvas = document.getElementById('background-canvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
-let mouse = { x: null, y: null };
+let scene, camera, renderer, particles;
+let particlePositions;
+let mouseX = 0, mouseY = 0;
+let windowHalfX = window.innerWidth / 2;
+let windowHalfY = window.innerHeight / 2;
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+function initBackground() {
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 1000);
+    camera.position.z = 400;
+
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0); // transparent background
+
+    const particleCount = 800;
+    const geometry = new THREE.BufferGeometry();
+    particlePositions = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount; i++) {
+        particlePositions[i*3] = (Math.random() * 800) - 400;    // x
+        particlePositions[i*3 + 1] = (Math.random() * 800) - 400; // y
+        particlePositions[i*3 + 2] = (Math.random() * 800) - 400; // z
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+    const material = new THREE.PointsMaterial({
+        color: document.body.classList.contains('light-mode') ? 0x111111 : 0xffffff,
+        size: 2,
+        sizeAttenuation: true,
+        transparent: true,
+        opacity: 0.7,
+    });
+
+    particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    window.addEventListener('resize', onWindowResize);
+    document.addEventListener('mousemove', onDocumentMouseMove);
+    document.addEventListener('click', onDocumentClick);
+
+    animateBackground();
 }
 
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
-    }
-    update() {
-        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
-        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
-        this.x += this.speedX;
-        this.y += this.speedY;
-    }
-    draw(particleColor) {
-        ctx.fillStyle = particleColor;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
+function onWindowResize() {
+    windowHalfX = window.innerWidth / 2;
+    windowHalfY = window.innerHeight / 2;
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function initParticles() {
-    particles = [];
-    let numberOfParticles = (canvas.height * canvas.width) / 9000;
-    for (let i = 0; i < numberOfParticles; i++) {
-        particles.push(new Particle());
-    }
+function onDocumentMouseMove(event) {
+    mouseX = (event.clientX - windowHalfX);
+    mouseY = (event.clientY - windowHalfY);
 }
 
-function connectParticles(particleColor) {
-    let opacityValue = 1;
-    // Connect particles to each other
-    for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
-            let distance = Math.sqrt(
-                (particles[a].x - particles[b].x) * (particles[a].x - particles[b].x) +
-                (particles[a].y - particles[b].y) * (particles[a].y - particles[b].y)
-            );
-            if (distance < 100) {
-                opacityValue = 1 - (distance / 100);
-                let lineColor = particleColor.replace('1)', `${opacityValue})`);
-                ctx.strokeStyle = lineColor;
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(particles[a].x, particles[a].y);
-                ctx.lineTo(particles[b].x, particles[b].y);
-                ctx.stroke();
-            }
-        }
+function onDocumentClick() {
+    // On click, scatter particles randomly for a brief moment
+    for (let i = 0; i < particlePositions.length; i += 3) {
+        particlePositions[i] += (Math.random() - 0.5) * 50;
+        particlePositions[i + 1] += (Math.random() - 0.5) * 50;
+        particlePositions[i + 2] += (Math.random() - 0.5) * 50;
     }
-    // Connect particles to mouse
-    if (mouse.x && mouse.y) {
-        for (let i = 0; i < particles.length; i++) {
-            let distance = Math.sqrt(
-                (particles[i].x - mouse.x) * (particles[i].x - mouse.x) +
-                (particles[i].y - mouse.y) * (particles[i].y - mouse.y)
-            );
-            if (distance < 150) {
-                opacityValue = 1 - (distance / 150);
-                let lineColor = particleColor.replace('1)', `${opacityValue})`);
-                ctx.strokeStyle = lineColor;
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(mouse.x, mouse.y);
-                ctx.stroke();
-            }
-        }
-    }
+    particles.geometry.attributes.position.needsUpdate = true;
 }
 
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const isLightMode = document.body.classList.contains('light-mode');
-    const particleColor = isLightMode ? 'rgba(0,0,0,1)' : 'rgba(255,255,255,1)';
+function animateBackground() {
+    requestAnimationFrame(animateBackground);
 
-    for (const p of particles) {
-        p.update();
-        p.draw(particleColor);
+    // Slowly rotate the particle field based on mouse position
+    particles.rotation.y += 0.001 + (mouseX * 0.00001);
+    particles.rotation.x += 0.001 + (-mouseY * 0.00001);
+
+    // Slight floating effect
+    const positions = particles.geometry.attributes.position.array;
+    for (let i = 0; i < positions.length; i += 3) {
+        positions[i + 1] += Math.sin(Date.now() * 0.001 + i) * 0.001;
     }
-    connectParticles(particleColor);
-    requestAnimationFrame(animate);
+    particles.geometry.attributes.position.needsUpdate = true;
+
+    renderer.render(scene, camera);
 }
 
-// Event Listeners for background
-window.addEventListener('resize', () => {
-    resizeCanvas();
-    initParticles();
-});
-canvas.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-});
-canvas.addEventListener('mouseleave', () => {
-    mouse.x = null;
-    mouse.y = null;
-});
+// Update particle color on theme toggle
+function updateParticleColor() {
+    if (!particles) return;
+    particles.material.color.set(document.body.classList.contains('light-mode') ? 0x111111 : 0xffffff);
+}
 
-resizeCanvas();
-initParticles();
-animate();
+initBackground();
 
-// ------------------Interactive Character in "Work With Me" section -----------_----------
+// ------------------ Interactive Character in "Work With Me" section ------------------
+
 document.addEventListener('DOMContentLoaded', () => {
     const character = document.getElementById('character-container');
     const eyes = document.getElementById('eyes');

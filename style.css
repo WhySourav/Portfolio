@@ -282,10 +282,14 @@ footer {
 .theme-toggle:hover { background: rgba(255,255,255,0.25); transform: rotate(20deg); }
 
 /* --- Light Mode Overrides --- */
+
+
 body.light-mode {
-    background: #f7f7f7;
-    color: #111;
+    background: #fafafa;
+    color: #222;
 }
+
+
 body.light-mode :root {
     --character-body: #a78bfa; /* Lighter Purple */
     --character-eye-bg: #e5e7eb;
@@ -297,27 +301,66 @@ body.light-mode .tilt {
     border: 1px solid #e5e7eb;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
-body.light-mode .card:hover {
-    box-shadow: 0 0 25px rgba(124, 58, 237, 0.2);
+
+
+
+body.light-mode header {
+    background: rgba(250, 250, 250, 0.85);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
-body.light-mode header { background: rgba(247, 247, 247, 0.7); }
-body.light-mode nav a { color: #333; }
-body.light-mode .cta { background: #7C3AED; color: #fff; }
-body.light-mode .btn { border: 1px solid #ddd; color: #111; }
-body.light-mode .btn:hover { background: rgba(0,0,0,0.05); }
-body.light-mode blockquote { border-left-color: #7C3AED; color: #444; }
-body.light-mode footer { background: #fff; border-top: 1px solid #e5e7eb;}
-body.light-mode .socials a { color: #111; }
-body.light-mode .socials a:hover { color: #7C3AED; }
+
+body.light-mode nav a {
+    color: #444;
+}
+
+body.light-mode nav a:hover {
+    color: #7C3AED;
+}
+
+body.light-mode .btn {
+    border: 1px solid #ccc;
+    color: #333;
+    background: #fff;
+}
+
+body.light-mode .btn:hover {
+    background: #f0e7ff;
+    border-color: #7C3AED;
+    color: #7C3AED;
+}
+
+body.light-mode .cta {
+    background: #7C3AED;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+body.light-mode .card {
+    background: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+body.light-mode blockquote {
+    border-left-color: #7C3AED;
+    color: #555;
+}
+
 body.light-mode input,
 body.light-mode textarea {
-    background: #e5e7eb;
-    color: #111;
+    background: #f9f9f9;
+    color: #222;
+    border: 1px solid #ccc;
 }
+
 body.light-mode input::placeholder,
 body.light-mode textarea::placeholder {
-    color: #6b7280;
+    color: #999;
 }
+
+
+
+
 
 /* --- Responsiveness --- */
 @media (max-width: 768px) {
@@ -337,5 +380,24 @@ body.light-mode textarea::placeholder {
 }
 
 
+
+
+#waving-character svg {
+    transform-origin: 50% 50%;
+    animation: wave 3s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+#waving-character svg:hover,
+#waving-character svg:focus {
+    animation-play-state: paused;
+    transform: scale(1.1) rotate(10deg);
+    outline: none;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+}
 
 

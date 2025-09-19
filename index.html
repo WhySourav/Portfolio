@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Added Three.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
 </head>
 <body>
 
@@ -35,6 +37,18 @@
                 <div class="badge">✨ Hello! I’m</div>
                 <h2><span class="gradient-text">Sourav Sharma</span></h2>
                 <p class="subtitle">A creative <b>Developer </b> & Student who loves to learn new things , And earn new experiences.</p>
+
+                <!-- Added waving cartoon SVG here -->
+                <div id="waving-character" aria-label="Waving cartoon hand" role="img" tabindex="0" style="margin-top: 20px;">
+                    <svg width="80" height="80" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+                        <g id="hand">
+                            <circle cx="32" cy="32" r="30" fill="#7C3AED" />
+                            <path id="wave-fingers" d="M20 30 L24 20 L28 30 L32 20 L36 30 L40 20 L44 30" stroke="#fff" stroke-width="3" stroke-linecap="round" />
+                            <circle cx="32" cy="44" r="10" fill="#fff" />
+                        </g>
+                    </svg>
+                </div>
+
                 <div class="hero-actions">
                     <a class="btn" href="#projects">See my projects →</a>
                     <a class="btn" href="#work">Work with me</a>
@@ -44,6 +58,8 @@
         </div>
     </div>
 </section>
+
+<!-- Rest of your HTML remains unchanged -->
 
 <section id="about">
     <div class="container">
