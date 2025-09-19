@@ -211,6 +211,7 @@ blockquote {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
   gap: 20px;
+  grid-template-columns: 1fr 0.8fr;
 }
 .Team-dreamdevs, .project2 {
   height: 150px;
@@ -219,9 +220,10 @@ blockquote {
   background: linear-gradient(135deg,#22C55E,#06B6D4);
   text-align: center;
   color: #0b0f1a;
+  grid-template-columns: 1fr 0.8fr;
 }
 .project2 {
-    background: linear-gradient(135deg, #F43F5E, #7C3AED);
+    background: linear-gradient(135deg, #22C55E, #06B6D4);
 }
 
 /* --- Work With Me --- */
