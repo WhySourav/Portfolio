@@ -180,8 +180,9 @@ nav a:hover::after {
 /* --- About, Projects & Cards --- */
 .about {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  transition: background 0.3s ease, color 0.3s ease;
   gap: 20px;
+
 }
 .card {
   background: rgba(255,255,255,0.05);
@@ -215,12 +216,14 @@ blockquote {
 }
 .Team-dreamdevs, .project2 {
   height: 150px;
+  transition: background 0.3s ease, color 0.3s ease;
   border-radius: 12px;
   display: grid; place-items: center;
   background: linear-gradient(135deg,#22C55E,#06B6D4);
   text-align: center;
   color: #0b0f1a;
-  grid-template-columns: 1fr 0.8fr;
+
+  
 }
 .project2 {
     background: linear-gradient(135deg, #22C55E, #06B6D4);
@@ -229,7 +232,7 @@ blockquote {
 /* --- Work With Me --- */
 .work-grid {
     display: grid;
-    grid-template-columns: 1fr 0.8fr;
+  
     gap: 30px;
     align-items: center;
 }
