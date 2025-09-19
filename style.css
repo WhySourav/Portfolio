@@ -150,18 +150,16 @@ nav a:hover::after {
     grid-template-columns: 1fr; /* This aligns the two cards vertically */
 }
 .card {
+    background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 16px;
     margin-bottom: 20px;
-    
-    /* New gradient background and transition for the hover effect */
-    background-image: linear-gradient(to right, #7b58e6, #3b82f6);
-    transition: transform 0.3s ease, background-image 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card:hover {
     transform: translateY(-8px) scale(1.02);
-    background-image: linear-gradient(to left, #7b58e6, #3b82f6); /* Shifts the gradient direction */
+    box-shadow: 0 0 25px rgba(124, 58, 237, 0.4); /* This is the old glow effect you had */
 }
 .section-title {
     font-family: 'Poppins', sans-serif;
@@ -175,9 +173,9 @@ blockquote {
 }
 
 /* --- Projects --- */
-.projects {
+.projects.projects {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* This makes the cards side-by-side and responsive */
     gap: 20px;
 }
 .Team-dreamdevs, .project2 {
