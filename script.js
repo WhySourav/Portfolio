@@ -129,7 +129,37 @@ function updateParticleColor() {
 
 initBackground();
 
-// 3D Interactive Robot next to Hero Section using Three.js
+// ------------------ Interactive Character in "Work With Me" section ------------------
+
+document.addEventListener('DOMContentLoaded', () => {
+    const character = document.getElementById('character-container');
+    const eyes = document.getElementById('eyes');
+
+    if (character && eyes) {
+        const eyeMoveRange = 15; // How far the pupils can move in pixels
+
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const rect = character.getBoundingClientRect();
+
+            // Center of the character SVG
+            const charX = rect.left + rect.width / 2;
+            const charY = rect.top + rect.height / 2;
+
+            // Angle and distance from character to cursor
+            const angle = Math.atan2(clientY - charY, clientX - charX);
+            const distance = Math.min(eyeMoveRange, Math.hypot(clientX - charX, clientY - charY) / 10);
+            
+            // Calculate pupil position
+            const x = Math.cos(angle) * distance;
+            const y = Math.sin(angle) * distance;
+
+            eyes.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    }
+});
+
+// ------------------ 3D Interactive Robot next to Hero Section ------------------
 
 const robotContainer = document.getElementById('robot-container');
 let robotScene, robotCamera, robotRenderer, robotMesh;
@@ -210,41 +240,9 @@ window.addEventListener('resize', () => {
     robotCamera.aspect = robotContainer.clientWidth / robotContainer.clientHeight;
     robotCamera.updateProjectionMatrix();
     robotRenderer.setSize(robotContainer.clientWidth, robotContainer.clientHeight);
+
+    // Also update background canvas size
+    onWindowResize();
 });
 
 initRobot();
-
-
-
-
-
-
-// ------------------ Interactive Character in "Work With Me" section ------------------
-
-document.addEventListener('DOMContentLoaded', () => {
-    const character = document.getElementById('character-container');
-    const eyes = document.getElementById('eyes');
-
-    if (character && eyes) {
-        const eyeMoveRange = 15; // How far the pupils can move in pixels
-
-        document.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const rect = character.getBoundingClientRect();
-
-            // Center of the character SVG
-            const charX = rect.left + rect.width / 2;
-            const charY = rect.top + rect.height / 2;
-
-            // Angle and distance from character to cursor
-            const angle = Math.atan2(clientY - charY, clientX - charX);
-            const distance = Math.min(eyeMoveRange, Math.hypot(clientX - charX, clientY - charY) / 10);
-            
-            // Calculate pupil position
-            const x = Math.cos(angle) * distance;
-            const y = Math.sin(angle) * distance;
-
-            eyes.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    }
-});

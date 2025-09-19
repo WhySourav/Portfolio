@@ -108,10 +108,10 @@ nav a:hover::after {
 
 /* --- Hero --- */
 .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 40px;
 }
 .hero-card {
     background: rgba(255,255,255,0.05);
@@ -119,6 +119,8 @@ nav a:hover::after {
     border-radius: 20px;
     transition: transform 0.2s ease;
     width: fit-content;
+    flex: 1;
+    max-width: 600px;
 }
 .gradient-text {
     background: linear-gradient(90deg,#06B6D4,#7C3AED,#F43F5E);
@@ -159,7 +161,7 @@ nav a:hover::after {
 }
 .card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 0 25px rgba(124, 58, 237, 0.4); /* This is the old glow effect you had */
+    box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
 }
 .section-title {
     font-family: 'Poppins', sans-serif;
@@ -173,9 +175,9 @@ blockquote {
 }
 
 /* --- Projects --- */
-.projects.projects {
+.projects {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* This makes the cards side-by-side and responsive */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 .Team-dreamdevs, .project2 {
@@ -197,7 +199,7 @@ blockquote {
     grid-template-columns: 1fr 1fr;
     gap: 30px;
     align-items: center;
-    position: relative; /* This is crucial for positioning the character */
+    position: relative;
 }
 .character-container {
     display: grid;
@@ -256,7 +258,7 @@ textarea { min-height: 120px; resize: vertical; }
     color: #06B6D4;
 }
 .socials i {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px;
 }
 
 /* --- Footer --- */
@@ -282,27 +284,10 @@ footer {
 .theme-toggle:hover { background: rgba(255,255,255,0.25); transform: rotate(20deg); }
 
 /* --- Light Mode Overrides --- */
-
-
 body.light-mode {
     background: #fafafa;
     color: #222;
 }
-
-
-body.light-mode :root {
-    --character-body: #a78bfa; /* Lighter Purple */
-    --character-eye-bg: #e5e7eb;
-    --character-pupil: #1f2937;
-}
-body.light-mode .card,
-body.light-mode .tilt {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-
 
 body.light-mode header {
     background: rgba(250, 250, 250, 0.85);
@@ -341,6 +326,10 @@ body.light-mode .card {
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
+body.light-mode .card:hover {
+    box-shadow: 0 0 25px rgba(124, 58, 237, 0.2);
+}
+
 body.light-mode blockquote {
     border-left-color: #7C3AED;
     color: #555;
@@ -358,44 +347,28 @@ body.light-mode textarea::placeholder {
     color: #999;
 }
 
-
-
-
-
 /* Fix links visibility in About section for light mode */
 body.light-mode .about a,
 body.light-mode .about .list li {
-    color: #444; /* Darker text for links and list items */
+    color: #444;
     text-decoration: underline;
     cursor: pointer;
 }
+
 body.light-mode .about a:hover {
     color: #7C3AED;
-
-
-
-
-
-/* --- Responsiveness --- */
-@media (max-width: 768px) {
-    .hero-inner, .about, .projects, .work-grid {
-        grid-template-columns: 1fr;
-    }
-    .cube-scene {
-        display: none;
-    }
-    .nav {
-        flex-direction: column;
-        gap: 10px;
-    }
-    .work-grid {
-        gap: 50px;
-    }
 }
 
+/* Fix links visibility in Contact section for light mode */
+body.light-mode .socials a {
+    color: #111;
+}
 
+body.light-mode .socials a:hover {
+    color: #7C3AED;
+}
 
-
+/* --- Waving Cartoon Character Animation --- */
 #waving-character svg {
     transform-origin: 50% 50%;
     animation: wave 3s ease-in-out infinite;
@@ -414,17 +387,19 @@ body.light-mode .about a:hover {
     50% { transform: rotate(15deg); }
 }
 
-}
-
-
-
-
 /* Hero section flex layout for robot */
 .hero-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
+}
+
+#robot-container {
+    flex: 1;
+    max-width: 400px;
+    height: 400px;
+    cursor: grab;
 }
 
 @media (max-width: 900px) {
@@ -435,5 +410,27 @@ body.light-mode .about a:hover {
         max-width: 100%;
         height: 300px;
         margin-top: 30px;
+    }
+}
+
+/* AOS pop-out animation overrides (optional for smoother effect) */
+[data-aos="zoom-in"] {
+    transform-origin: center center;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .hero-inner, .about, .projects, .work-grid {
+        grid-template-columns: 1fr;
+    }
+    .cube-scene {
+        display: none;
+    }
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .work-grid {
+        gap: 50px;
     }
 }
