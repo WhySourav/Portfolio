@@ -7,16 +7,12 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
+  <canvas id="background-canvas"></canvas>
 
-    <canvas id="background-canvas"></canvas>
-    
-
-
-  
 <header>
   <div class="nav">
     <a href="#top" class="brand">
@@ -32,7 +28,6 @@
   </div>
 </header>
 
-  <!-- Hero -->
   <section id="top" class="hero">
     <div class="hero-inner">
       <div class="hero-card">
@@ -61,7 +56,6 @@
     </div>
   </section>
 
-  <!-- About -->
   <section id="about">
     <div class="container">
       <h3 class="section-title">Something About Me</h3>
@@ -90,7 +84,6 @@
     </div>
   </section>
 
-  <!-- Projects -->
   <section id="projects">
     <div class="container">
       <h3 class="section-title"> Some Projects</h3>
@@ -104,22 +97,22 @@
           <h4>TEAM — DREAMDEVS</h4>
           <p> 
             <blockquote>
-             “A leader leads by example, not by force.”—Sun Tzu
+              “A leader leads by example, not by force.”—Sun Tzu
             </blockquote>
-           <li> <b>“Where imagination meets execution."</b> </li>
-           <br>
-           <li>
-          🧩 <b>Minds that think beyond</b> — We solve problems you didn’t even know existed. <b>(sometimes even the ones we didn’t know existed until 3 AM)</b>
-           </li>
-           <br>
+            <li> <b>“Where imagination meets execution."</b> </li>
+            <br>
             <li>
-               <b>MORAL</b>— Integrity and teamwork drive everything we build. <b> A win isn’t a win if it isn’t shared. </b>
+            🧩 <b>Minds that think beyond</b> — We solve problems you didn’t even know existed. <b>(sometimes even the ones we didn’t know existed until 3 AM)</b>
+            </li>
+            <br>
+            <li>
+                <b>MORAL</b>— Integrity and teamwork drive everything we build. <b> A win isn’t a win if it isn’t shared. </b>
             </li>
             <br>
             <li>
               <b>WHAT Makes Us Different</b> — We don’t just develop—we dream, we build, we laugh… and sometimes, <b>we make questionable life choices at 2 AM.</b>
             </li>
-            <br>    
+            <br>  
             <li>
               <b>Care To Join Us ?</b> — Bring your creativity, your curiosity, and maybe your favorite snack. The rest, we’ll figure out together.
               <br>
@@ -128,7 +121,6 @@
               <li>
                   <b>How To Join — If You Have What It Takes</b> just Click on Connect and Hop in to Our Discord and Then <b>WELCOME ABOARD.!!</b>
               </li>
-
           </p>
         </article>
         <article class="project card reveal"   data-aos="fade-up" data-aos-delay="200">
@@ -140,11 +132,10 @@
     </div>
   </section>
 
-  <!-- Work With Me -->
   <section id="work">
     <div class="container">
       <h3 class="section-title">Work with me</h3>
-      <div class="grid">
+      <div class="work-grid">
         <div class="card reveal">
           <form id="contact-form" novalidate>
             <label>Name<input id="name" type="text" required></label>
@@ -154,22 +145,31 @@
             <p id="form-status"></p>
           </form>
         </div>
+        <div id="character-container" class="character-container reveal">
+            <svg id="character-svg" viewBox="0 0 200 200">
+                <path d="M50,150 Q100,200 150,150 L150,80 Q100,30 50,80 Z" fill="var(--character-body)"/>
+                <circle cx="100" cy="100" r="45" fill="var(--character-eye-bg)"/>
+                <g id="eyes">
+                    <circle id="left-eye" cx="80" cy="100" r="12" fill="var(--character-pupil)"/>
+                    <circle id="right-eye" cx="120" cy="100" r="12" fill="var(--character-pupil)"/>
+                </g>
+            </svg>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
   <section id="contact">
     <div class="container">
       <h3 class="section-title">Contact</h3>
       <div class="card reveal">
         <p>Open to freelance, Open source projects, collabs, and opportunities.</p>
         <div class="socials">
-          <a href="https://discord.gg/JG7aus57">discord</a>
-          <a href="https://www.instagram.com/sourav_pandit_45/">Instagram</a>
-          <a href="#">LinkedIn</a>
-          <a href="mailto:letsmail.souravsharma@gmail.com">Email</a>
-          <a href="https://github.com/WhySourav">Github</a>
+          <a href="https://discord.gg/JG7aus57" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
+          <a href="https://www.instagram.com/sourav_pandit_45/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="mailto:letsmail.souravsharma@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+          <a href="https://github.com/WhySourav" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Github</a>
         </div>
       </div>
     </div>
@@ -186,14 +186,21 @@
   </footer>
 
   <script src="script.js"></script>
+ 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+
 <script>
     AOS.init({
         once: true, // Animations will only happen once
         duration: 1000 // Animation duration in milliseconds
     });
+
 </script>
+
+
 </body>
 
-</html>
 
+</html>
