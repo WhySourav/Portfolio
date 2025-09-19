@@ -6,11 +6,14 @@
   <title>Sourav Sharma — Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 <body>
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-  <div class="orb three"></div>
+
+
+    <canvas id="background-canvas"></canvas>
+    
 
 
   
@@ -33,7 +36,7 @@
   <section id="top" class="hero">
     <div class="hero-inner">
       <div class="hero-card">
-        <div class="tilt" id="tilt">
+        <div class="tilt" id="tilt" data-aos="fade-up">
           <div class="badge">✨ Hello! I’m</div>
           <h2><span class="gradient-text">Sourav Sharma</span></h2>
           <p class="subtitle">A creative <b>Developer </b> & Student who loves to learn new things , And earn new experiences.</p>
@@ -45,7 +48,7 @@
         </div>
       </div>
 
-      <div class="cube-scene reveal">
+      <div class="cube-scene reveal" data-aos="fade-up">
         <div class="cube">
           <div class="face front">Sourav • Sharma</div>
           <div class="face back">Create • Ship</div>
@@ -63,7 +66,7 @@
     <div class="container">
       <h3 class="section-title">Something About Me</h3>
       <div class="about">
-        <div class="card reveal">
+        <div class="card reveal" data-aos="fade-right">
           <div class="badge">⚡ What I’m great at</div>
           <ul class="list">
             <li>Creative thinking, Leadership, Developing Things.</li>
@@ -76,7 +79,7 @@
             <br>
           </ul>
         </div>
-        <div class="card reveal">
+        <div class="card reveal"  data-aos="fade-left" data-aos-delay="200">
           <div class="badge">🧠 A Thought that I live by</div>
           <blockquote>
             “The supreme art of war is to subdue the enemy without fighting.” — Sun Tzu
@@ -92,7 +95,7 @@
     <div class="container">
       <h3 class="section-title"> Some Projects</h3>
       <div class="projects">
-        <article class="project card reveal">
+        <article class="project card reveal"  data-aos="fade-up">
           <div class="Team-dreamdevs">
             <blockquote>
               <b>“We don’t just develop - we dream in code." <br> WELCOME TO DREAMDEVS. </b>
@@ -128,7 +131,7 @@
 
           </p>
         </article>
-        <article class="project card reveal">
+        <article class="project card reveal"   data-aos="fade-up" data-aos-delay="200">
           <div class="project2">COMING SOON</div>
           <h4>Join Discord If You Wanna Know !!</h4>
           <p>One Of Our Team Member uses Arch BTW. !!!</p>
@@ -183,6 +186,13 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        once: true, // Animations will only happen once
+        duration: 1000 // Animation duration in milliseconds
+    });
+</script>
 </body>
 
 </html>
