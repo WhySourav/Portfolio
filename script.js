@@ -129,6 +129,96 @@ function updateParticleColor() {
 
 initBackground();
 
+// 3D Interactive Robot next to Hero Section using Three.js
+
+const robotContainer = document.getElementById('robot-container');
+let robotScene, robotCamera, robotRenderer, robotMesh;
+
+function initRobot() {
+    robotScene = new THREE.Scene();
+
+    robotCamera = new THREE.PerspectiveCamera(45, robotContainer.clientWidth / robotContainer.clientHeight, 0.1, 1000);
+    robotCamera.position.z = 5;
+
+    robotRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    robotRenderer.setSize(robotContainer.clientWidth, robotContainer.clientHeight);
+    robotContainer.appendChild(robotRenderer.domElement);
+
+    // Simple robot geometry: a box with eyes (spheres)
+    const bodyGeometry = new THREE.BoxGeometry(1.5, 2, 1);
+    const bodyMaterial = new THREE.MeshStandardMaterial({ color: 0x7C3AED, metalness: 0.6, roughness: 0.4 });
+    robotMesh = new THREE.Mesh(bodyGeometry, bodyMaterial);
+    robotScene.add(robotMesh);
+
+    // Eyes
+    const eyeGeometry = new THREE.SphereGeometry(0.15, 16, 16);
+    const eyeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+    const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+    const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+    leftEye.position.set(-0.4, 0.3, 0.51);
+    rightEye.position.set(0.4, 0.3, 0.51);
+    robotMesh.add(leftEye);
+    robotMesh.add(rightEye);
+
+    // Pupils
+    const pupilGeometry = new THREE.SphereGeometry(0.07, 16, 16);
+    const pupilMaterial = new THREE.MeshStandardMaterial({ color: 0x0b0f1a });
+    const leftPupil = new THREE.Mesh(pupilGeometry, pupilMaterial);
+    const rightPupil = new THREE.Mesh(pupilGeometry, pupilMaterial);
+    leftPupil.position.set(0, 0, 0.16);
+    rightPupil.position.set(0, 0, 0.16);
+    leftEye.add(leftPupil);
+    rightEye.add(rightPupil);
+
+    // Light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    robotScene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(5, 5, 5);
+    robotScene.add(directionalLight);
+
+    // Interaction: rotate robot based on mouse movement inside container
+    robotContainer.addEventListener('mousemove', (e) => {
+        const rect = robotContainer.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+
+        // Rotate robot mesh slightly based on cursor position
+        robotMesh.rotation.y = (x - 0.5) * 0.6; // left-right rotation
+        robotMesh.rotation.x = (y - 0.5) * 0.6; // up-down rotation
+    });
+
+    robotContainer.addEventListener('mouseleave', () => {
+        // Reset rotation when mouse leaves
+        robotMesh.rotation.x = 0;
+        robotMesh.rotation.y = 0;
+    });
+
+    animateRobot();
+}
+
+function animateRobot() {
+    requestAnimationFrame(animateRobot);
+    // Subtle idle rotation
+    robotMesh.rotation.z = Math.sin(Date.now() * 0.001) * 0.05;
+    robotRenderer.render(robotScene, robotCamera);
+}
+
+window.addEventListener('resize', () => {
+    if (!robotRenderer) return;
+    robotCamera.aspect = robotContainer.clientWidth / robotContainer.clientHeight;
+    robotCamera.updateProjectionMatrix();
+    robotRenderer.setSize(robotContainer.clientWidth, robotContainer.clientHeight);
+});
+
+initRobot();
+
+
+
+
+
+
 // ------------------ Interactive Character in "Work With Me" section ------------------
 
 document.addEventListener('DOMContentLoaded', () => {

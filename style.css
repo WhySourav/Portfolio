@@ -362,6 +362,20 @@ body.light-mode textarea::placeholder {
 
 
 
+/* Fix links visibility in About section for light mode */
+body.light-mode .about a,
+body.light-mode .about .list li {
+    color: #444; /* Darker text for links and list items */
+    text-decoration: underline;
+    cursor: pointer;
+}
+body.light-mode .about a:hover {
+    color: #7C3AED;
+
+
+
+
+
 /* --- Responsiveness --- */
 @media (max-width: 768px) {
     .hero-inner, .about, .projects, .work-grid {
@@ -400,4 +414,26 @@ body.light-mode textarea::placeholder {
     50% { transform: rotate(15deg); }
 }
 
+}
 
+
+
+
+/* Hero section flex layout for robot */
+.hero-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+@media (max-width: 900px) {
+    .hero-inner {
+        flex-direction: column;
+    }
+    #robot-container {
+        max-width: 100%;
+        height: 300px;
+        margin-top: 30px;
+    }
+}
