@@ -180,25 +180,21 @@ nav a:hover::after {
 /* --- About, Projects & Cards --- */
 .about {
   display: grid;
+  transition: background 0.3s ease, color 0.3s ease;
   gap: 20px;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 .card {
-  .card {
-    /* Existing styles */
-    border-radius: 10px;
-    padding: 2rem;
-    
-    /* New gradient background and transition */
-    background-image: linear-gradient(to right, #7b58e6, #3b82f6);
-    transition: transform 0.3s ease, background-image 0.3s ease;
-    
-    /* Removed the box-shadow */
-}
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .card:hover {
- transform: translateY(-8px) scale(1.02);
-    background-image: linear-gradient(to left, #7b58e6, #3b82f6); /* Shifts the gradient direction */
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
 }
 .section-title {
   font-family: 'Poppins', sans-serif;
