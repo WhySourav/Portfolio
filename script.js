@@ -89,6 +89,9 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
+
+
+
 function onDocumentMouseMove(event) {
     mouseX = (event.clientX - windowHalfX);
     mouseY = (event.clientY - windowHalfY);
@@ -244,5 +247,7 @@ window.addEventListener('resize', () => {
     // Also update background canvas size
     onWindowResize();
 });
+
+
 
 initRobot();

@@ -187,7 +187,6 @@ blockquote {
     display: grid; place-items: center;
     background: linear-gradient(135deg,#22C55E,#06B6D4);
     text-align: center;
-    color: #0b0f1a;
 }
 .project2 {
     background: linear-gradient(135deg, #22C55E, #06B6D4);
